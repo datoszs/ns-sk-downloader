@@ -1,0 +1,21 @@
+
+
+## Converting all documents to TXT
+
+Run this bash sequence in the output folder (fix path to soffice/libreoffice binary):
+```
+cd files
+find . -name \*.pdf -exec pdftotext "{}" \;
+find . -name \*.pdf -exec rm "{}" \;
+
+/Applications/LibreOffice.app/Contents/MacOS/soffice --headless --convert-to txt *.docx
+find . -name \*.docx -exec rm "{}" \;
+/Applications/LibreOffice.app/Contents/MacOS/soffice --headless --convert-to txt *.rtf
+find . -name \*.rtf -exec rm "{}" \;
+/Applications/LibreOffice.app/Contents/MacOS/soffice --headless --convert-to txt *.doc
+find . -name \*.doc -exec rm "{}" \;
+
+cd ..
+```
+
+For checking that there are no other files than txt, run `find . ! '(' -name '*.txt' ‘)’`
